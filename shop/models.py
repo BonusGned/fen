@@ -16,8 +16,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, default=title)
-    image = models.ImageField(verbose_name='Image', blank=True)
+    slug = models.SlugField(max_length=100)
+    image = models.ImageField(verbose_name='Image', blank=True, upload_to='product/')
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     price = models.DecimalField(decimal_places=2, max_digits=10)
     description = models.TextField()
