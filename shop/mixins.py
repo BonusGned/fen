@@ -1,8 +1,7 @@
 from django.views.generic import View
 
-from cart.models import Cart
-from .models import Category
-from customers.models import Customer
+from .models import Cart
+from .models import Customer
 
 
 class CartMixin(View):
@@ -13,4 +12,10 @@ class CartMixin(View):
                 customer = Customer.objects.create(
                     user=request.user
                 )
-            cart = Cart.objects.filter(owner)
+            cart = Cart.objects.filter(owner=customer, in_order=False).first()
+            if not cart:
+                cart = Cart.objects.create(owner=customer)
+        else:
+            cart = Cart.objects.filter(for_anonymous_user=True).first()
+        self.cart = cart
+        return super().dispatch(request, *args, **kwargs)
