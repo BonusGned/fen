@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
 from django.utils import timezone
 
 User = get_user_model()
@@ -12,6 +13,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse_lazy('category_detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Category'
@@ -35,6 +39,9 @@ class Product(models.Model):
 
     def get_sale(self):
         return int(self.price * (100 - self.stock) / 100)
+
+    def get_absolute_url(self):
+        return reverse_lazy('product_detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Product'

@@ -6,6 +6,7 @@ from .models import Product, Category
 
 
 class BaseView(CartMixin, View):
+
     def get(self, request, *args, **kwargs):
         categories = Category.objects.all()
         products = Product.objects.filter(available=True)
@@ -33,6 +34,7 @@ class BaseView(CartMixin, View):
 
 
 class ProductDetailView(CartMixin, DetailView):
+    model = Product
     context_object_name = 'product'
     template_name = 'product_detail.html'
     slug_url_kwarg = 'slug'
@@ -40,14 +42,15 @@ class ProductDetailView(CartMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart'] = self.cart
+        # context['category'] = Category.objects.get(id=Product.category_id)
         return context
 
 
 class CategoryDetailView(CartMixin, DetailView):
     model = Category
     queryset = Category.objects.all()
-    context_object_name = 'category'
-    template_name = 'category_detail.html'
+    context_object_name = 'categories'
+    template_name = 'category.html'
     slug_url_kwarg = 'slug'
 
     def get_context_data(self, **kwargs):

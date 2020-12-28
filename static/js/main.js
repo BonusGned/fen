@@ -202,7 +202,7 @@ $('.fixed__footer').css({'margin-bottom': $newsletter_height.height() + 'px'});
       $('.filter__wrap').removeClass('filter__menu__on');
       $('.body__overlay').removeClass('is-visible');
   });
-    
+
     
 /*------------------------------------    
   13. User Menu
@@ -589,7 +589,7 @@ $('.image-popup').magnificPopup({
     var $gridItems = '.grid-item';
     // filter items on button click
     $grid.imagesLoaded(function() {
-        
+
         $('.portfolio-menu-active').on('click', 'button', function() {
             $(this).siblings('.active').removeClass('active');
             $(this).addClass('active');

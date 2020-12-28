@@ -5,6 +5,7 @@ from .models import Customer
 
 
 class CartMixin(View):
+
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             customer = Customer.objects.filter(user=request.user).first()
