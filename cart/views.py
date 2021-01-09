@@ -5,8 +5,9 @@ from django.views import View
 
 from orders.forms import OrderForm
 from shop.mixins import CartMixin
-from shop.models import Product, CartProduct, Category
+from shop.models import Product, CartProduct, Category, Customer, Cart
 from shop.utils import recalc_cart
+from shop.models import Product
 
 
 class AddToCartView(CartMixin, View):
@@ -20,6 +21,7 @@ class AddToCartView(CartMixin, View):
         if created:
             self.cart.products.add(cart_product)
         recalc_cart(self.cart)
+        messages.add_message(request, messages.INFO, "Товар успешно добавлен")
         return HttpResponseRedirect('/cart/')
 
 
@@ -54,7 +56,7 @@ class ChangeQTYView(CartMixin, View):
         return HttpResponseRedirect('/cart/')
 
 
-class CartView(CartMixin, View):
+class CartListView(CartMixin, View):
 
     def get(self, request, *args, **kwargs):
         categories = Category.objects.all()

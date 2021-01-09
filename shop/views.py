@@ -15,22 +15,8 @@ class BaseView(CartMixin, View):
             'products': products,
             'cart': self.cart
         }
+
         return render(request, 'base.html', context)
-
-
-# class ProductListView(ListView):
-#     model = Product
-#     queryset = Product.objects.filter(available=True)
-#     template_name = 'base.html'
-#
-#
-# class CategoryListView(ListView):
-#     model = Category
-#     queryset = Category.objects.all()
-#     template_name = 'base.html'
-
-
-# class LoginView()
 
 
 class ProductDetailView(CartMixin, DetailView):
@@ -42,7 +28,6 @@ class ProductDetailView(CartMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart'] = self.cart
-        # context['category'] = Category.objects.get(id=Product.category_id)
         return context
 
 

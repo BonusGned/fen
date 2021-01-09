@@ -11,7 +11,7 @@
                             <div class="bradcaump__inner text-center">
                                 <h2 class="bradcaump-title">{{ product.title }}</h2>
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <a class="breadcrumb-item" href="testing/index.html">Home</a>
                                   <span class="brd-separetor">/</span>
                                   <span class="breadcrumb-item active">{{ product.title }}</span>
                                 </nav>
@@ -37,7 +37,7 @@
                         <div class="sidebar-active col-md-5 col-lg-5 col-sm-7 col-xs-12 xmt-30">
                             <div class="htc__product__details__inner ">
                                 <div class="pro__detl__title">
-                                    <h2>{{ category }}</h2>
+                                    <h2>Category: {{ product.category }}</h2>
                                 </div>
                                 <div class="pro__dtl__rating">
                                     <ul class="pro__rating">
@@ -89,7 +89,7 @@
                                 </div>
                                 <ul class="pro__dtl__btn">
                                     <li class="buy__now__btn"><a href="#">buy now</a></li>
-                                    <li><a href="#"><span class="ti-heart"></span></a></li>
+                                    <li><a title="Add To Cart" href="{% url 'add_to_cart' slug=product.slug %}"><span class="ti-heart"></span></a></li>
                                     <li><a href="#"><span class="ti-email"></span></a></li>
                                 </ul>
                                 <div class="pro__social__share">
@@ -290,16 +290,5 @@
                 </div>
             </div>
         </section>
-        <!-- End Product tab -->
-        <img src="{{ product.image.url }}" class="img-fluid">
-    </div>
-    <div class="col-md-8">
-        <h3>{{ product.title }}</h3>
-        <p>Цена: {{ product.price }} руб.</p>
-        <p>Описание: {{ product.description }}</p>
-        <hr>
-{#        <a href="{% url 'add_to_cart' ct_model=ct_model slug=product.slug %}"><button class="btn btn-danger">Добавить в корзину</button></a>#}
-{#    </div>#}
-</div>
 </div>
 {% endblock %}

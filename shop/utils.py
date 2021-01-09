@@ -9,3 +9,4 @@ def recalc_cart(cart):
         cart.total_price = 0
     cart.total_products = cart_data['id__count']
     cart.save()
+

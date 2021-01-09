@@ -59,7 +59,7 @@ class Customer(models.Model):
 
 
 class CartProduct(models.Model):
-    owner = models.ForeignKey(Customer, verbose_name='Customer', on_delete=models.CASCADE)
+    user = models.ForeignKey('Customer', verbose_name='Customer', on_delete=models.CASCADE)
     cart = models.ForeignKey('Cart', verbose_name='Cart', on_delete=models.CASCADE, related_name='related_products')
     product = models.ForeignKey(Product, verbose_name='Product', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
@@ -68,13 +68,17 @@ class CartProduct(models.Model):
     def __str__(self):
         return f'Product: {self.product.title} (for cart)'
 
+    def save(self, *args, **kwargs):
+        self.total_price = self.quantity * self.product.get_sale()
+        super().save(*args, **kwargs)
+
 
 class Cart(models.Model):
-    owner = models.ForeignKey(Customer, null=True, verbose_name='Owner', on_delete=models.CASCADE)
-    products = models.ManyToManyField('CartProduct', verbose_name='Cart', related_name='related_cart')
+    owner = models.ForeignKey('Customer', null=True, verbose_name='Owner', on_delete=models.CASCADE)
+    products = models.ManyToManyField('CartProduct', blank=True, related_name='related_cart')
     total_products = models.PositiveIntegerField(default=0)
     total_price = models.DecimalField(max_digits=9, default=0, decimal_places=2, verbose_name='Total price')
-    in_order = models.BooleanField(default=True)
+    in_order = models.BooleanField(default=False)
     for_anonymous_user = models.BooleanField(default=False)
 
     def __str__(self):
