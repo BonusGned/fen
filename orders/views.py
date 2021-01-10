@@ -28,7 +28,7 @@ class MakeOrderView(CartMixin, View):
             self.cart.save()
             new_order.cart = self.cart
             new_order.save()
-            customer.order.add(new_order)
+            customer.orders.add(new_order)
             messages.add_message(request, messages.INFO, 'Quantity changed successfully')
             return HttpResponseRedirect('/')
         return HttpResponseRedirect('/checkout/')
