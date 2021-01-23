@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].label = 'Login'
-        self.fields['password'].lable = 'Password'
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['username'].label = 'Login'
+    #     self.fields['password'].label = 'Password'
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -35,14 +35,14 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].lable = 'Login'
-        self.fields['password'].lable = 'Password'
-        self.fields['confirm_password'].lable = 'Login'
-        self.fields['phone'].lable = 'Phone number'
-        self.fields['first_name'].lable = 'Your Name'
-        self.fields['last_name'].lable = 'Your Last Name'
-        self.fields['address'].lable = 'Address'
-        self.fields['email'].lable = 'Email'
+        self.fields['username'].label = 'Login'
+        self.fields['password'].label = 'Password'
+        self.fields['confirm_password'].label = 'Confirm password'
+        self.fields['phone'].label = 'Phone number'
+        self.fields['first_name'].label = 'Your Name'
+        self.fields['last_name'].label = 'Your Last Name'
+        self.fields['address'].label = 'Address'
+        self.fields['email'].label = 'Email'
 
     def clean_email(self):
         email = self.cleaned_data['email']

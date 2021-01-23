@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
 
@@ -25,8 +26,8 @@ class LoginView(CartMixin, View):
             if user:
                 login(request, user)
                 return HttpResponseRedirect('/')
-            context = {'form': form, 'cart': self.cart}
-            return render(request, 'login.html', context)
+        context = {'form': form, 'cart': self.cart}
+        return render(request, 'login.html', context)
 
 
 class RegistrationView(CartMixin, View):
@@ -35,7 +36,7 @@ class RegistrationView(CartMixin, View):
         form = RegistrationForm(request.POST or None)
         categories = Category.objects.all()
         context = {'form': form, 'categories': categories, 'cart': self.cart}
-        return render(request, 'registration.html', context)
+        return render(request, 'register.html', context)
 
     def post(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST or None)
@@ -57,7 +58,7 @@ class RegistrationView(CartMixin, View):
             login(request, user)
             return HttpResponseRedirect('/')
         context = {'form': form, 'cart': self.cart}
-        return render(request, 'registration.html', context)
+        return render(request, 'register.html', context)
 
 
 class ProfileView(CartMixin, View):

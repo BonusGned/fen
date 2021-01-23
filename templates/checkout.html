@@ -6,7 +6,7 @@
 {% block content %}
     <!-- Start Bradcaump area -->
     <div class="ht__bradcaump__area"
-         style="background: rgba(0, 0, 0, 0) url(images/bg/2.jpg) no-repeat scroll center center / cover ;">
+         style="background: rgba(0, 0, 0, 0) url('../static/images/bg/2.jpg') no-repeat scroll center center / cover ;">
         <div class="ht__bradcaump__wrap">
             <div class="container">
                 <div class="row">
@@ -35,17 +35,18 @@
                                 <h2 class="section-title-3">Ordering</h2>
                                 <div class="checkout-form-inner">
                                     <div class="single-checkout-box">
-                                        <form action="{% url 'make_order' %}" method="POST">
+                                        <form action="{% url 'make_order' %}"  method="POST">
                                             {% csrf_token %}
-                                            First Name: {{ form.first_name }} <br>
-                                            Last Name: {{ form.last_name }} <br>
-                                            Phone: {{ form.phone }} <br>
-                                            Address: {{ form.address }} <br>
-                                            Buying type: {{ form.buying_type }} <br>
                                             <br>
-                                            Order date: {{ form.order_date }} <br>
+                                            First Name: <br>{{ form.first_name }} <br>
+                                            Last Name: <br>{{ form.last_name }} <br>
+                                            Phone: <br>{{ form.phone }} <br>
+                                            Address: <br>{{ form.address }} <br>
+                                            Buying type: <br>{{ form.buying_type }} <br>
                                             <br>
-                                            Message: {{ form.comment }} <br>
+                                            Order date: <br>{{ form.order_date }} <br>
+                                            <br>
+                                            Message: <br>{{ form.comment }} <br>
                                             <input type="submit" class="btn btn-success btn-block mb-3"
                                                    values="Оформить заказ">
                                         </form>
